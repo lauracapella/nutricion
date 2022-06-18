@@ -1,12 +1,22 @@
 import './App.css';
 import React, {useState} from 'react'
 import MenusList from './pages/MenusList'
+import {BrowserRouter as Router, Route, Routes, UNSAFE_RouteContext} from 'react-router-dom'
+import Wellcome from './pages/Wellcome'
+import Login from './pages/Login';
+import Registration from './pages/Registration';
+import Navegacion from './pages/Navegacion';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import Buscador from './pages/Buscador';
+import UserContext from './UserContext'
+
 
 function App() {
-  const API_KEY = 'bcb3f5e2c205486885c61c1621f39f98' ;
-  const API_URL= `https://api.spoonacular.com/mealplanner/generate?apiKey=${API_KEY}&timeFrame=day&targetCalorias={calorias}`
+  /* const [calorias, setCalorias] = useState(1100);
+
+  const API_KEY = '47db0067b4cb45faaffcc2037bd7cc54' ;
+  const API_URL= `https://api.spoonacular.com/mealplanner/generate?apiKey=${API_KEY}&timeFrame=day&targetCalories=${calorias}`
   const [menuData, setMenuData] = useState(null);
-  const [calorias, setCalorias] = useState(1200);
 
   function handleChange(event){
     setCalorias(event.target.value)
@@ -25,21 +35,38 @@ function App() {
         console.log("error");
       }
     );
-    
+  } */
 
-  }
   
-  //console.log(getMealData)
   return (
-    <>
-    <input
+  
+    <Router>
+   
+    <Navegacion/>
+    <UserContext.Provider value='Hola desde context'>
+
+    <Routes>
+      
+        <Route path='/' element={<Wellcome/>}/> 
+        <Route path='/buscador' element={<Buscador />} />
+        <Route path="/Login" element = {< Login />} />
+        <Route path="/Registration" element = {< Registration/>} />
+    </Routes>
+
+</UserContext.Provider>
+
+
+    <br/>
+    <br/>
+    {/*  <input
     type='number'
     placeholder='p.e 1800'
     onChange={handleChange}
-    />
+    /> 
     <button onClick={getMealData}>Mr. recetas</button>
-    {menuData && <MenusList menusData={menuData} />}
-    </>
+    {menuData && <MenusList menusData={menuData} />}  */}
+    </Router>
+  
   );
 }
 

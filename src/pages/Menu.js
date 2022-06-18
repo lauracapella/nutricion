@@ -3,8 +3,11 @@ import React, {useState, useEffect} from 'react';
 
 export default function Menu({menu}){
     const [imgUrl, setImgUrl] = useState('');
+    const API_KEY = '90f272f6bec044debff90c278a79cc27';
+    const API_KEY_2 ='47db0067b4cb45faaffcc2037bd7cc54';
+
     useEffect(()=>{
-        fetch(`https://api.spoonacular.com/recipes/${menu.id}/information?apiKey=bcb3f5e2c205486885c61c1621f39f98`)
+        fetch(`https://api.spoonacular.com/recipes/${menu.id}/information?apiKey=${API_KEY_2}`)
         .then((response) => response.json())
         .then((data) => {
             setImgUrl(data.image)
@@ -15,14 +18,13 @@ export default function Menu({menu}){
     }, [menu.id])
 
     return(
-        <div>
-            <h1>{menu.title}</h1>
-            <img src={imgUrl} alt='receta'></img>
-            <ul>
-                <li>Tiempo preparación: {menu.readyInMinutes} min</li>
-                <li>Comensales: {menu.servings}</li>
-            </ul>
-            <a href={menu.sourceUrl}>Ver receta</a>
+        <div className='flex-wrap mx-12 col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4'>
+            
+            <img className='img-thumbnail' src={imgUrl} alt='receta'></img>
+            <h5>{menu.title}</h5>
+                <p>Tiempo preparación: {menu.readyInMinutes} min <br />
+                Comensales: {menu.servings}</p>
+            <button className="btn btn-secondary rounded-pill px-5"><a target='_blank' className="text-light text-decoration-none" href={menu.sourceUrl}>Ver receta</a></button>
         </div>
 
     )
