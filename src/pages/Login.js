@@ -9,9 +9,28 @@ export default function Login() {
         password:'',
     });
 
-    const {login} = useAuth();
+    const {login, loginWithGoogle, resetPassword} = useAuth();
     const navigate = useNavigate();
     const [error, setError] = useState();
+
+    const handleGoogleSignIn = async () => {
+        try{
+            await loginWithGoogle();
+        }catch (error){
+            setError(error.message)
+        }
+
+    }
+
+    const handleResetPassword= async() => {
+    if(!user.email) return setError('Introduce un email')
+        try{
+        setError('Has recibido un email con las inidcaciones para resetear la contraseña')
+            await resetPassword (user.email)
+        }catch(error){
+            setError(error.message)
+        }
+    }
 
     const handleChange = ({target: {name, value}})=> setUser({...user, [name]: value});
     const handleSubmit = async (e) =>{
@@ -54,8 +73,10 @@ export default function Login() {
         placeholder='******'/>
 
         <button>LOGIN</button>
+        <a href='#!' onClick={handleResetPassword}>¿Has olvidado la contraseña?</a>
 
         </form>
+        <button onClick={handleGoogleSignIn}>Login con Google</button>
         </>
     )
 }

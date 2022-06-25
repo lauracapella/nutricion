@@ -1,15 +1,10 @@
 import { useState } from "react";
 import MenusList from "./MenusList";
 import React from "react";
-
- import {useAuth} from '../context/authContext'
+import {useAuth} from '../context/authContext'
 import {useNavigate} from 'react-router-dom'
 
- 
-
-
 export default function Buscador(){
-
 
   const [calorias, setCalorias] = useState(1800);
   const API_KEY = '90f272f6bec044debff90c278a79cc27' ;
@@ -38,25 +33,20 @@ export default function Buscador(){
 
   const {user, logout, loading} = useAuth();
   const navigate = useNavigate();
-  console.log(user)
-   const handleLogOut = async () => {
+  const handleLogOut = async () => {
        await logout()
    }
 
    if(loading) return  <h1>loading</h1>
 
-
-
     return(
     <>
-
-    <p>Wellcome {user.email}</p>
-     <button onClick={handleLogOut}>LogOut</button>
+    <p>Wellcome {user.displayName || user.email}</p>
+    <button onClick={handleLogOut}>LogOut</button>
 
     <div className="d-flex justify-content-center m-5">
         <div className="mw-100 ">
         <h3>¿Quantas calorias vas a consumir hoy?</h3> 
-
     <div className="row no-gutters mt-3 align-items-center">
         <div className="col col-md-8">
             <input 
@@ -66,12 +56,11 @@ export default function Buscador(){
             onChange={handleChange}/>
         </div>
         <div className="col-auto">
-            
-                <button className="btn btn-secondary btn-outline-light border-0 rounded-pill ml-n5 px-4 " 
-                onClick={getMealData}>
-                  Buscar menú
-                  </button> 
-
+           <button 
+              className="btn btn-secondary btn-outline-light border-0 rounded-pill ml-n5 px-4 " 
+              onClick={getMealData}>
+               Buscar menú
+            </button> 
         </div>
     </div>
     </div>
