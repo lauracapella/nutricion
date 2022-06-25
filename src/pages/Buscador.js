@@ -1,9 +1,16 @@
 import { useState } from "react";
 import MenusList from "./MenusList";
+import React from "react";
 
+ import {useAuth} from '../context/authContext'
+import {useNavigate} from 'react-router-dom'
+
+ 
 
 
 export default function Buscador(){
+
+
   const [calorias, setCalorias] = useState(1800);
   const API_KEY = '90f272f6bec044debff90c278a79cc27' ;
   const API_KEY_2 ='47db0067b4cb45faaffcc2037bd7cc54';
@@ -27,22 +34,29 @@ export default function Buscador(){
         console.log("error");
       }
     );
-    
-
   }
+
+  const {user, logout, loading} = useAuth();
+  const navigate = useNavigate();
+  console.log(user)
+   const handleLogOut = async () => {
+       await logout()
+   }
+
+   if(loading) return  <h1>loading</h1>
+
+
+
     return(
     <>
+
+    <p>Wellcome {user.email}</p>
+     <button onClick={handleLogOut}>LogOut</button>
+
     <div className="d-flex justify-content-center m-5">
         <div className="mw-100 ">
         <h3>¿Quantas calorias vas a consumir hoy?</h3> 
 
-
-{/*         <input className="form-control-lg "
-            type='number'
-            placeholder='Calorias (p.e 1800)'
-            onChange={handleChange}
-        /> 
-    <button className="btn btn-secondary rounded-pill m-3 btn-lg" onClick={getMealData}>Buscar menú</button> <br /> */}
     <div className="row no-gutters mt-3 align-items-center">
         <div className="col col-md-8">
             <input 
@@ -61,7 +75,6 @@ export default function Buscador(){
         </div>
     </div>
     </div>
-   
 
     </div>
     <div className="d-flex justify-content-center mx-5">

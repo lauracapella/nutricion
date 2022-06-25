@@ -18,7 +18,7 @@ export default function Menu({menu}){
     }, [menu.id])
 
     return(
-        <div className='flex-wrap mx-12 col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4'>
+        <div className=' '>
             
             <img className='img-thumbnail' src={imgUrl} alt='receta'></img>
             <h5>{menu.title}</h5>

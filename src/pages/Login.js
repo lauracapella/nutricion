@@ -1,69 +1,61 @@
-import {useRef, useState, useEffect} from "react"; 
-import Wellcome from "./Wellcome";
 
-const Login = () =>{
+import {useState} from 'react'
+import {useAuth} from '../context/authContext'
+import { useNavigate } from 'react-router-dom';
 
-    const [emailLog, setEmailLog] = useState('');
-    const [passwordLog, setPasswordLog] = useState('');
-    const [flag, setFlag] = useState(false);
-    const [home, setHome] = useState(true);
-    const[isAutheticated, setisAutheticated] = useState(false);
+export default function Login() {
+    const [user, setUser] = useState({
+        user:'',
+        password:'',
+    });
 
+    const {login} = useAuth();
+    const navigate = useNavigate();
+    const [error, setError] = useState();
 
-    function handleLogin(e){
-        e.preventDefault();
-        let mail = localStorage.getItem("Email").replace(/"/g, "");
-        let pass = localStorage.getItem("Password").replace(/"/g, "");
-
-        if(!emailLog || !passwordLog){
-            setFlag(true)
-        } else if (passwordLog !== pass || emailLog !== mail){
-            setFlag(true)
-
-        }else{
-            setHome(!home)
-            setFlag(false)
-            setisAutheticated(true);
-        }
+    const handleChange = ({target: {name, value}})=> setUser({...user, [name]: value});
+    const handleSubmit = async (e) =>{
+        e.preventDefault()
+        setError('')
+        try{
+            await login(user.email, user.password);
+            navigate('../buscador')
+            
+        }catch (error){
+            if (error.code === 'auth/invalid-email'){
+                setError('Correo invalido ')
+            }else if (error.code === 'auth/weak-password'){
+                setError('La contrasña debe contener al menos 6 carácteres')
+            }else if (error.code === 'auth/email-already-in-use'){
+                setError('Usuario ya registrado con este email')
+            }else{
+                setError(error.message)
+            }
     }
-    
+    }
+
     return(
-        <div className="m-auto mt-5 d-flex p-2 justify-content-center">
+        <>
+        {error && <p>{error}</p>}
+        <form onSubmit={handleSubmit}>
+        <label htmlFor="email">Email</label>
+        <input 
+        type='email' 
+        name='email' 
+        placeholder='youremail@gmail.com'
+        onChange={handleChange}/>
 
-        { home ? (
-         
-         <form className='form-group col-10 col-sm-10 col-md-10 col-lg-8 col-xl-6 mx-5' onSubmit={ handleLogin }>
-             <h1>Login</h1>
-                <label>Email:</label>
-                <input
-                    type='text'
-                    placeholder="Indica email"
-                    onChange={e => setEmailLog(e.target.value)}
-                    className="form-control"
-                />
-                <br/>
+        <label htmlFor="password">Email</label>
+        <input 
+        type='password' 
+        name='password' 
+        id='password'
+        onChange={handleChange}
+        placeholder='******'/>
 
-                <label>Contraseña:</label>
-                <input
-                    type='text'
-                    placeholder="Indica contraseña"
-                    onChange={e => setPasswordLog(e.target.value)}
-                    className="form-control"
-                />
-                <div className='float-end'>
-                    <button className='btn btn-light mt-2 ' type='submit'>LOG IN</button>
-                </div>
-           
-             {flag && (
-                <p>Rellena todos los campos del formulario</p>
-            )} 
-         </form>
-         ) : (
-             <Wellcome />
-         ) }
-        </div>
-      
-        
-        )}
+        <button>LOGIN</button>
 
-export default Login;
+        </form>
+        </>
+    )
+}

@@ -1,18 +1,25 @@
 
 import React from "react";
-import UserContext from "../UserContext";
-import useContext from 'react'
+/* import {useAuth} from '../context/authContext'
+import {useNavigate} from 'react-router-dom'
 
+  */
 
 export default function Wellcome(){
-    //console.log('hola ' + React.useContext(UserContext) )
+/* 
+   const {user, logout, loading} = useAuth();
+   const navigate = useNavigate();
+   console.log(user)
+    const handleLogOut = async () => {
+        await logout()
+    }
 
-
-    const msg = React.useContext(UserContext)
+    if(loading) return  <h1>loading</h1> */
     
     return(
         <>
-        <div>{msg}</div>
+{/*         <p>Wellcome {user.email}</p>
+        <button onClick={handleLogOut}>LogOut</button> */}
         <div className="container me-0">
             <div className="row h-100">
                 <div className="col-sm my-auto">
