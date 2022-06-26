@@ -39,5 +39,58 @@
 
 
 .img_wellcome{
-  height: 90vh;
+  width: 50vw;
 }
+
+.menu_nav{
+  background-color: #007b1b;
+
+}
+
+.buscar_home{
+  background-color: #007b1b;
+  color: aliceblue;
+}
+
+.buscar_home a {
+  color: antiquewhite;
+  text-decoration: none;
+}
+
+.buscar_home a:hover {
+  color:darkgray;
+  text-decoration: none;
+}
+
+.sin_margen{
+  min-width: 100vw;
+}
+
+@media only screen and (max-width: 999px) {
+  .img_wellcome{
+    width: 100vw;
+  }
+  .texto_wellcome{
+    margin-left: 0px;
+  }
+  .sin_margen{
+    min-width: 90vw;
+  }
+}
+
+
+p, h1, h2, h3, h4, h5, h6{
+  font-family: 'Montserrat', sans-serif;
+}
+
+a {
+  font-family: 'Montserrat', sans-serif;
+  width: 600;
+}
+
+.boton_contraseña {
+  color:#282c34;
+  text-decoration: none;
+}
+
+

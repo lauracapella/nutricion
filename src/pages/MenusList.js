@@ -6,7 +6,7 @@ export default function MenusList({menusData}){
 return(
     <>
     <div className="d-flex flex-column justify-content-center mx-2 ">
-        <div className='d-flex justify-content-center'>
+        <div className='d-flex justify-content-center mb-5 mx-5 p-2 border'>
             <h4 className='justify-content-center'>Calorias: {NUTRIENTES.calories.toFixed(0)}</h4>
         </div>
         <div className="d-flex justify-content-center mb-5 ">

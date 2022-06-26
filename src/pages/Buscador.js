@@ -2,7 +2,7 @@ import { useState } from "react";
 import MenusList from "./MenusList";
 import React from "react";
 import {useAuth} from '../context/authContext'
-import {useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom' 
 
 export default function Buscador(){
 
@@ -31,36 +31,44 @@ export default function Buscador(){
     );
   }
 
-  const {user, logout, loading} = useAuth();
+const {user, logout, loading} = useAuth();
   const navigate = useNavigate();
   const handleLogOut = async () => {
        await logout()
    }
 
-   if(loading) return  <h1>loading</h1>
+   if(loading) return  <h1>loading</h1> 
 
     return(
     <>
-    <p>Wellcome {user.displayName || user.email}</p>
-    <button onClick={handleLogOut}>LogOut</button>
+    <div className='container'>
+      <div className="row d-flex justify-content-end h-100"> 
+        <p className="col-auto my-auto">Hola {user.displayName || user.email} !</p>
+        <button className="col-auto btn btn-link link-dark" onClick={handleLogOut}>LogOut</button>
+      </div>
+    </div> 
 
     <div className="d-flex justify-content-center m-5">
-        <div className="mw-100 ">
-        <h3>¿Quantas calorias vas a consumir hoy?</h3> 
-    <div className="row no-gutters mt-3 align-items-center">
-        <div className="col col-md-8">
+        <div className=" ">
+        <h4 className="justify-content-center">¿Quantas calorias quieres consumir hoy?</h4> 
+
+       
+
+    <div className="mt-3 align-items-center">
+        <div className="input-group mb-3">
             <input 
             className="form-control border-secondary rounded-pill" 
-            type='' 
+            type='text' 
             placeholder='Calorias (p.e 1800)'
             onChange={handleChange}/>
-        </div>
-        <div className="col-auto">
+        
+        <div className="input-group-append">
            <button 
               className="btn btn-secondary btn-outline-light border-0 rounded-pill ml-n5 px-4 " 
               onClick={getMealData}>
                Buscar menú
             </button> 
+        </div>
         </div>
     </div>
     </div>

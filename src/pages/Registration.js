@@ -20,7 +20,7 @@ export default function Registration() {
         setError('')
         try{
             await signup(user.email, user.password);
-            navigate('/');
+            navigate('/Buscador');
         }catch (error){
             if (error.code === 'auth/invalid-email'){
                 setError('Correo invalido ')
@@ -35,15 +35,20 @@ export default function Registration() {
     }
 
     return(
-        <>
-        {error && <p>{error}</p>}
-        <form onSubmit={handleSubmit}>
+        <div className='col-12 col-sm-10 col-md-10 col-lg-8 col-xl-6 mt-5 mx-auto '>
+        
+        <div className="m-auto justify-content-center">
+        <h3 className='text-center'>REGISTRO</h3>
+
+        <form onSubmit={handleSubmit} className="form-group  mx-5">
         <label htmlFor="email">Email</label>
         <input 
         type='email' 
         name='email' 
         placeholder='youremail@gmail.com'
-        onChange={handleChange}/>
+        onChange={handleChange}
+        className="form-control form-control-lg"/>
+        <br />
 
         <label htmlFor="password">Email</label>
         <input 
@@ -51,11 +56,19 @@ export default function Registration() {
         name='password' 
         id='password'
         onChange={handleChange}
-        placeholder='******'/>
+        placeholder='******'
+        className="form-control form-control-lg"/>
 
-        <button>REGSITRARME</button>
+        <br/>
+
+        <div className='text-danger'>
+            <p>{error && <p>{error}</p>}</p>
+        </div>
+
+        <button className='btn btn-large btn-block btn-secondary w-100'>REGSITRARME</button>
 
         </form>
-        </>
+        </div>
+        </div>
     )
 }
