@@ -12,19 +12,13 @@ export const useAuth = () => {
 export function AuthProvider({children}){
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-
     const signup = (email, password) => createUserWithEmailAndPassword(auth, email, password);
-
     const login = (email, password) => signInWithEmailAndPassword(auth, email, password);
-
     const logout = () => signOut(auth)
-
     const loginWithGoogle = () => {
         const googleProvider = new GoogleAuthProvider()
         return signInWithPopup(auth, googleProvider);
-
     }
-        
     const resetPassword = (email) => {
         sendPasswordResetEmail(auth, email)
     }
@@ -41,6 +35,5 @@ export function AuthProvider({children}){
         <authContext.Provider value={{signup, login, user, logout, loading, loginWithGoogle, resetPassword}}>
             {children}
         </authContext.Provider>
-    )
-    
+    )  
 }

@@ -15,7 +15,6 @@ function App() {
   const [usuario, setUsuario] = useState(null)
   const valorProvider = useMemo(() => ({usuario, setUsuario}, [usuario, setUsuario]))
   
-  
   return (
     <Router>
     <Navegacion/>
@@ -31,10 +30,7 @@ function App() {
           <Route path="/Registration" element = {< Registration/>} />
         </Routes>
       </AuthProvider>
-    <br/>
-    <br/>
     </Router>
-  
   );
 }
 

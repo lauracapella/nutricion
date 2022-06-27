@@ -19,13 +19,11 @@ export default function Menu({menu}){
 
     return(
         <div className=' '>
-            
             <img className='img-thumbnail' src={imgUrl} alt='receta'></img>
             <h5>{menu.title}</h5>
                 <p>Tiempo preparación: {menu.readyInMinutes} min <br />
                 Comensales: {menu.servings}</p>
-            <button className="btn btn-secondary rounded-pill px-5"><a target='_blank' className="text-light text-decoration-none" href={menu.sourceUrl}>Ver receta</a></button>
+            <button className="btn btn-secondary bg-success text-white rounded-pill px-5 mb-5"><a target='_blank' className="text-light text-decoration-none" href={menu.sourceUrl}>Ver receta</a></button>
         </div>
-
     )
 }

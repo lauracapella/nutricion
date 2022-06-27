@@ -20,7 +20,6 @@ export default function Login() {
         }catch (error){
             setError(error.message)
         }
-
     }
 
     const handleResetPassword= async() => {
@@ -34,6 +33,7 @@ export default function Login() {
     }
 
     const handleChange = ({target: {name, value}})=> setUser({...user, [name]: value});
+
     const handleSubmit = async (e) =>{
         e.preventDefault()
         setError('')
@@ -60,41 +60,45 @@ export default function Login() {
 
     return(
         <div className='col-12 col-sm-10 col-md-10 col-lg-8 col-xl-6 mt-5 mx-auto '>
-        
-        <div className="m-auto justify-content-center">
-        <h3 className='text-center'>LOGIN</h3>
-       
-        <form onSubmit={handleSubmit} className="form-group  mx-5">
-            <label htmlFor="email">Email</label>
-            <input 
-            type='email' 
-            name='email' 
-            placeholder='youremail@gmail.com'
-            onChange={handleChange}
-            className="form-control form-control-lg"/>
-            <br/>
+            <div className="m-auto justify-content-center">
+                <h3 className='text-center'>LOGIN</h3>
+                <form onSubmit={handleSubmit} className="form-group  mx-5">
+                    <label htmlFor="email">Email</label>
+                    <input 
+                    type='email' 
+                    name='email' 
+                    placeholder='youremail@gmail.com'
+                    onChange={handleChange}
+                    className="form-control form-control-lg"/>
+                    <br/>
 
-            <label htmlFor="password">Contraseña</label>
-            <input 
-            type='password' 
-            name='password' 
-            id='password'
-            onChange={handleChange}
-            placeholder='******'
-            className="form-control form-control-lg"
-            />
-            <br/>
+                <label htmlFor="password">Contraseña</label>
+                <input 
+                type='password' 
+                name='password' 
+                id='password'
+                onChange={handleChange}
+                placeholder='******'
+                className="form-control form-control-lg"
+                />
+                <br/>
+                <div className='text-danger'>
+                    <p>{error && <p>{error}</p>}</p>
+                </div>
+                <button className='btn btn-large btn-block btn-secondary w-100'>Log In</button>
 
-            <div className='text-danger'>
-                <p>{error && <p>{error}</p>}</p>
+                <div className='container'>
+                    <div className='row'>
+                        <div className='col  mt-2'>
+                            <a className='text-start boton_contraseña' href='./Registration' >Registro usuario</a>    
+                        </div>     
+                        <div className='col  mt-2 text-end'>
+                            <a className='text-end boton_contraseña' href='#!' onClick={handleResetPassword}>Recuperar contraseña</a>
+                        </div>       
+                    </div>
+                </div>
+                </form>
             </div>
-
-            <button className='btn btn-large btn-block btn-secondary w-100'>Log In</button>
-            <div className='text-end p-2'>
-                <a className='boton_contraseña' href='#!' onClick={handleResetPassword}>Recuperar contraseña</a>
-            </div>
-        </form>
-        </div>
         <hr></hr>
         <div className=' mx-5 pt-4'>
             <button className='btn btn-large btn-block btn-dark w-100' onClick={handleGoogleSignIn}>Login con Google</button>

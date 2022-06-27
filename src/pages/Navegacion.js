@@ -8,8 +8,8 @@ export default function Navegacion(){
     <>         
       <Navbar variant="dark"  expand="lg" className="menu_nav">
         <Container>
-          <Navbar.Brand href="./">Mr.Meals</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Brand href="./"><img className="logo-mrmelas" src={require("./img/logo-mrmeals-2.png")} alt="logo"/></Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="m-auto">
               <Nav.Link href="./Buscador" className="font-weight-bold" >MENÚ DEL DIA</Nav.Link> 
